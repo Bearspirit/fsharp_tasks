@@ -1,3 +1,20 @@
+let copper_per_silver = 12
+let silver_per_gold = 20
+
+let divmod (x, y) =
+    let (q, r) = (x / y, x % y)
+    if r >= 0 then
+        (q, r)
+    else
+        (q - 1, r + y)
+
+let norm_money x =
+    let (g, s, c) = x
+    let (sa, c1) = divmod(c, copper_per_silver)
+    let (ga, s1) = divmod(s + sa, silver_per_gold)
+    (g + ga, s1, c1)
+
+
 // 23.4.1
 let (.+.) x y =
     let (xg, xs, xc) = x
